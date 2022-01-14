@@ -4,9 +4,9 @@ This module uses the NiFi API to create an ExecuteProcess processor that will ex
 
 API Executing Process: https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.12.1/org.apache.nifi.processors.standard.ExecuteProcess/  
 
-Vulnerable architectures: x86, x64  
-Vulnerable platforms: Linux, OSX, Unix, Windows  
-Vulnerable protocols: http, https  
+Vulnerable architectures: **x86, x64**  
+Vulnerable platforms: **Linux, OSX, Unix, Windows**  
+Vulnerable protocols: **http, https**  
 
 **Please be aware that this exploit leaves signs of a compromise in a log file (Example: SQL injection data found in HTTP log) and modifies some configuration setting on the target machine, this is not a guide on how to exploit others, this is a guide on how to reproduce the vulnerability and how to fix it.**  
 
