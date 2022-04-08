@@ -73,7 +73,7 @@ Example Output:
     "outputPortCount": 0
 }</pre>
 ## POST /nifi-api/process-groups/\<ROOT-PROCESSOR-GROUP-ID\>/processors: Used to create an ExecuteProcess processor in the root group.  
-Content Type: **application/json**
+Content Type: **application/json**  
 Post Data:
 <pre>{
     "component": {
